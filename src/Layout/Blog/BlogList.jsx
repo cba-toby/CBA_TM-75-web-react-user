@@ -5,25 +5,43 @@ import BlogItem from "../../components/BlogItem";
 import axiosClient from "../../axios-client";
 import { useState } from "react";
 import Pagenation from "../../components/Pagenation";
+import SearchItem from "../../components/SearchItem";
+import SearchClick from "../../components/SearchClick";
+import LatestPosts from "../../components/LatestPosts";
 
 function BlogList() {
-  const [blogItems, setBlogItems] = useState([{}]);
+  const [postItems, setPostItems] = useState([{}]);
   const [categories, setCategories] = useState([{}]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(10);
+  const [categoriesExits, setCategoriesExits] = useState([]);
+  const [latestPosts, setLatestPosts] = useState([{}]);
 
   useEffect(() => {
     getBlogItems();
   }, []);
 
-  const getBlogItems = (page = currentPage) => {
+  const getBlogItems = (
+    page = currentPage,
+    search = null,
+    searchCategory = null
+  ) => {
     let url = `/user/post?page=${page}`;
-
+    if (search) {
+      url += `&search=${search}`;
+    }
+    if (searchCategory) {
+      url += `&category=${searchCategory}`;
+    }
     axiosClient.get(url).then((res) => {
-      setBlogItems(res.data.posts.data);
+      setPostItems(res.data.posts.data);
       setCategories(res.data.categories);
       setPageCount(res.data.posts.last_page);
       setCurrentPage(res.data.posts.current_page);
+      setCategoriesExits([
+        ...new Set(res.data.uniqueCategoryIds.map((post) => post.category_id)),
+      ]);
+      setLatestPosts(res.data.latestPosts);
     });
   };
 
@@ -39,6 +57,14 @@ function BlogList() {
     getBlogItems(newPage);
   };
 
+  const handleSearch = (value) => {
+    getBlogItems(null, value, null);
+  };
+
+  const searchCategory = (value) => {
+    getBlogItems(null, null, value);
+  };
+
   return (
     <>
       <SliderBlog />
@@ -47,24 +73,36 @@ function BlogList() {
           <div className="row">
             <div className="col-lg-8">
               <div className="row">
-                {blogItems.map((item, index) => (
+                {postItems.map((item, index) => (
                   <BlogItem
                     key={index}
                     imageUrl={item.image}
                     category={handleGetCategoryName(item.category_id)}
                     title={item.title}
                     content={item.summary}
-                    link="blog-single.html"
+                    link={`/blog-single/${item.slug}`}
                   />
                 ))}
-                <Pagenation
-                  pageCount={pageCount}
-                  currentPage={currentPage - 1}
-                  handlePageChange={handlePageChange}
+              </div>
+              <Pagenation
+                pageCount={pageCount}
+                currentPage={currentPage - 1}
+                handlePageChange={handlePageChange}
+              />
+            </div>
+            <div className="col-lg-4">
+              <div className="sidebar-wrap">
+                <SearchItem handleSearch={handleSearch} />
+                <SearchClick
+                  title="Danh mục"
+                  listSearch={categoriesExits}
+                  handleGetCategoryName={handleGetCategoryName}
+                  handleSearch={searchCategory}
                 />
+                <LatestPosts posts={latestPosts} />
               </div>
             </div>
-            <SidebarBlog />
+            {/* <SidebarBlog /> */}
           </div>
         </div>
       </section>
