@@ -7,7 +7,7 @@ function BlogContent(data) {
     return (
       <div className="text-center">
         <img
-          src={`http://blog.toby.com/get-image/${image}`}
+          src={`${process.env.REACT_APP_API_URL}/get-image/${image}`}
           alt="Image"
           className="img-fluid rounded"
           style={{ height: "300px" }}

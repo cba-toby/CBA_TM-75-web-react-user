@@ -9,6 +9,7 @@ import BlogComment from "../../components/BlogComment";
 function BlogItem() {
   const { slug } = useParams();
   const [postItem, setPostItem] = useState({});
+  const [author, setAuthor] = useState({});
 
   useEffect(() => {
     getItems(slug);
@@ -21,6 +22,7 @@ function BlogItem() {
       .get(url)
       .then((res) => {
         setPostItem(res.data.post);
+        setAuthor(res.data.author);
       })
       .catch((err) => {
         console.log(err);
@@ -39,7 +41,7 @@ function BlogItem() {
                 <BlogComment />
               </div>
             </div>
-            <SidebarBlog />
+            <SidebarBlog author={author} />
           </div>
         </div>
       </section>

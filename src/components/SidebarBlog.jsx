@@ -1,43 +1,40 @@
-function SidebarBlog() {
+function SidebarBlog({ author }) {
+  console.log(author);
+  const handleImage = (image) => {
+    if (image) {
+      return (
+        <img
+          src={`${process.env.REACT_APP_API_URL}/get-image/${image}`}
+          alt=""
+          className="img-fluid"
+        />
+      );
+    }
+  };
+  const { link_facebook, link_x, link_instagram } = author;
+  const socialLinks = [
+    { name: "Facebook", icon: "fab fa-facebook-f", link: link_facebook },
+    { name: "Twitter", icon: "fab fa-twitter", link: link_x },
+    { name: "LinkedIn", icon: "fab fa-linkedin-in", link: link_instagram },
+  ];
+
   return (
     <div className="col-lg-4">
       <div className="sidebar-wrap">
         <div className="sidebar-widget card border-0 mb-3">
-          <img src="images/blog/blog-author.jpg" alt="" className="img-fluid" />
+          {handleImage(author.image)}
           <div className="card-body p-4 text-center">
             <h5 className="mb-0 mt-4">Arther Conal</h5>
-            <p>Digital Marketer</p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Incidunt, dolore.
-            </p>
-
+            <p>{author.name}</p>
+            <p>{author.info}</p>
             <ul className="list-inline author-socials">
-              <li className="list-inline-item mr-3">
-                <a href="#">
-                  <i className="fab fa-facebook-f text-muted"></i>
-                </a>
-              </li>
-              <li className="list-inline-item mr-3">
-                <a href="#">
-                  <i className="fab fa-twitter text-muted"></i>
-                </a>
-              </li>
-              <li className="list-inline-item mr-3">
-                <a href="#">
-                  <i className="fab fa-linkedin-in text-muted"></i>
-                </a>
-              </li>
-              <li className="list-inline-item mr-3">
-                <a href="#">
-                  <i className="fab fa-pinterest text-muted"></i>
-                </a>
-              </li>
-              <li className="list-inline-item mr-3">
-                <a href="#">
-                  <i className="fab fa-behance text-muted"></i>
-                </a>
-              </li>
+              {socialLinks.map((social, index) => (
+                <li key={index} className="list-inline-item mr-3">
+                  <a href={social.link} target="_blank">
+                    <i className={social.icon + " text-muted"}></i>
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
