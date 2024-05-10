@@ -81,6 +81,7 @@ function BlogList() {
                     title={item.title}
                     content={item.summary}
                     link={`/blog-single/${item.slug}`}
+                    updated_at={item.updated_at}
                   />
                 ))}
               </div>

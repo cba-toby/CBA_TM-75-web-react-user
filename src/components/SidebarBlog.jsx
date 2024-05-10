@@ -24,15 +24,19 @@ function SidebarBlog({ author }) {
         <div className="sidebar-widget card border-0 mb-3">
           {handleImage(author.image)}
           <div className="card-body p-4 text-center">
-            <h5 className="mb-0 mt-4">Arther Conal</h5>
-            <p>{author.name}</p>
+            <h5 className="mb-0 mt-4">{author.name}</h5>
+            <p>Bloger</p>
             <p>{author.info}</p>
             <ul className="list-inline author-socials">
               {socialLinks.map((social, index) => (
                 <li key={index} className="list-inline-item mr-3">
-                  <a href={social.link} target="_blank">
-                    <i className={social.icon + " text-muted"}></i>
-                  </a>
+                  {social.link ? (
+                    <a href={social.link} target="_blank">
+                      <i className={social.icon + " text-muted"}></i>
+                    </a>
+                  ) : (
+                    ""
+                  )}
                 </li>
               ))}
             </ul>
