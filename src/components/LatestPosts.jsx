@@ -6,7 +6,7 @@ function LatestPosts({ posts }) {
     return (
       <img
         className="mr-4"
-        src={`http://blog.toby.com/get-image/${image}`}
+        src={`${process.env.REACT_APP_API_URL}/get-image/${image}`}
         alt=""
         style={{ width: "100px" }}
       />
