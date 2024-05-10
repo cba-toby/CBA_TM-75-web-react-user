@@ -4,16 +4,18 @@ import { formatDate } from "../utils/dateUtils";
 
 const BlogItem = ({ imageUrl, category, title, content, link, updated_at }) => {
   const handleImage = (image) => {
-    return (
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <img
-          src={`${process.env.REACT_APP_API_URL}/get-image/${image}`}
-          alt="Image"
-          className="img-fluid rounded"
-          style={{ height: "300px" }}
-        />
-      </div>
-    );
+    if (image) {
+      return (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <img
+            src={`${process.env.REACT_APP_API_URL}/get-image/${image}`}
+            alt="Image"
+            className="img-fluid rounded"
+            style={{ height: "300px" }}
+          />
+        </div>
+      );
+    }
   };
 
   const scrollToTop = () => {

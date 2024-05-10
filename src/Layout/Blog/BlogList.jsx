@@ -102,7 +102,6 @@ function BlogList() {
                 <LatestPosts posts={latestPosts} />
               </div>
             </div>
-            {/* <SidebarBlog /> */}
           </div>
         </div>
       </section>

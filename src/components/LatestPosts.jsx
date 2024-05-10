@@ -3,14 +3,16 @@ import { formatDate } from "../utils/dateUtils";
 
 function LatestPosts({ posts }) {
   const handleImage = (image) => {
-    return (
-      <img
-        className="mr-4"
-        src={`${process.env.REACT_APP_API_URL}/get-image/${image}`}
-        alt=""
-        style={{ width: "100px" }}
-      />
-    );
+    if (image) {
+      return (
+        <img
+          className="mr-4"
+          src={`${process.env.REACT_APP_API_URL}/get-image/${image}`}
+          alt=""
+          style={{ width: "100px" }}
+        />
+      );
+    }
   };
   const formattedDate = (updatedAt) => {
     return formatDate(updatedAt);
