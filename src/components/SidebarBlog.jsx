@@ -1,5 +1,4 @@
 function SidebarBlog({ author }) {
-  console.log(author);
   const handleImage = (image) => {
     if (image) {
       return (

@@ -51,7 +51,6 @@ function BlogList() {
   };
 
   const handlePageChange = (selectedItem) => {
-    console.log(selectedItem);
     const newPage = selectedItem.selected + 1;
     setCurrentPage(newPage);
     getBlogItems(newPage);
