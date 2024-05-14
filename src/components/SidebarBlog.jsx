@@ -1,10 +1,10 @@
 function SidebarBlog({ author }) {
-  const handleImage = (image) => {
+  const handleImage = (image, title) => {
     if (image) {
       return (
         <img
           src={`${process.env.REACT_APP_API_URL}/get-image/${image}`}
-          alt=""
+          alt={title}
           className="img-fluid"
         />
       );
@@ -21,7 +21,7 @@ function SidebarBlog({ author }) {
     <div className="col-lg-4">
       <div className="sidebar-wrap">
         <div className="sidebar-widget card border-0 mb-3">
-          {handleImage(author.image)}
+          {handleImage(author.image, author.name)}
           <div className="card-body p-4 text-center">
             <h5 className="mb-0 mt-4">{author.name}</h5>
             <p>Bloger</p>

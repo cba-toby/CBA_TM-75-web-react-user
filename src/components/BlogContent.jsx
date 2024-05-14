@@ -3,12 +3,12 @@ import { formatDate } from "../utils/dateUtils";
 
 function BlogContent(data) {
   const { title, content, updated_at, category, tags, image } = data.data;
-  const handleImage = (image) => {
+  const handleImage = (image, title) => {
     return (
       <div className="text-center">
         <img
           src={`${process.env.REACT_APP_API_URL}/get-image/${image}`}
-          alt="Image"
+          alt={title}
           className="img-fluid rounded"
           style={{ height: "300px" }}
         />
@@ -19,7 +19,7 @@ function BlogContent(data) {
     <>
       <div className="col-lg-12 mb-5">
         <div className="single-blog-item">
-          {handleImage(image)}
+          {handleImage(image, title)}
           <div className="blog-item-content bg-white p-5">
             <div className="blog-item-meta bg-gray py-1 px-2">
               <span className="text-muted text-capitalize mr-3">

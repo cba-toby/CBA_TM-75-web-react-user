@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { formatDate } from "../utils/dateUtils";
 
 const BlogItem = ({ imageUrl, category, title, content, link, updated_at }) => {
-  const handleImage = (image) => {
+  const handleImage = (image, title) => {
     if (image) {
       return (
         <div style={{ display: "flex", justifyContent: "center" }}>
           <img
             src={`${process.env.REACT_APP_API_URL}/get-image/${image}`}
-            alt="Image"
+            alt={title}
             className="img-fluid rounded"
             style={{ height: "300px" }}
           />
@@ -37,7 +37,7 @@ const BlogItem = ({ imageUrl, category, title, content, link, updated_at }) => {
   return (
     <div className="col-lg-6 col-md-6 mb-5">
       <div className="blog-item">
-        {handleImage(imageUrl)}
+        {handleImage(imageUrl, title)}
         <div className="blog-item-content bg-white p-4">
           <div className="blog-item-meta  py-1 px-2">
             <span className="text-muted text-capitalize mr-3">

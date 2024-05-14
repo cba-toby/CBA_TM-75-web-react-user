@@ -26,19 +26,6 @@ function SliderBlog() {
               <span className="text-white">Our blog</span>
               <h1 className="text-capitalize mb-4 text-lg">Blog articles</h1>
               <ul className="list-inline">
-                {/* <li className="list-inline-item">
-                  <a href="index.html" className="text-white">
-                    Home
-                  </a>
-                </li>
-                <li className="list-inline-item">
-                  <span className="text-white">/</span>
-                </li>
-                <li className="list-inline-item">
-                  <a href="#" className="text-white-50">
-                    Our blog
-                  </a>
-                </li> */}
                 {breadcrumb &&
                   breadcrumb.map((item, index) =>
                     item.active ? (
