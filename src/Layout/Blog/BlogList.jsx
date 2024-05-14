@@ -8,6 +8,7 @@ import Pagenation from "../../components/Pagenation";
 import SearchItem from "../../components/SearchItem";
 import SearchClick from "../../components/SearchClick";
 import LatestPosts from "../../components/LatestPosts";
+import Meta from "../../components/Head/Meta";
 
 function BlogList() {
   const [postItems, setPostItems] = useState([{}]);
@@ -66,6 +67,7 @@ function BlogList() {
 
   return (
     <>
+      <Meta title="Home" />
       <SliderBlog />
       <section className="section blog-wrap bg-gray">
         <div className="container">
