@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import { formatDate } from "../utils/dateUtils";
 
 function LatestPosts({ posts }) {
-  const handleImage = (image) => {
+  const handleImage = (image, title) => {
     if (image) {
       return (
         <img
           className="mr-4"
           src={`${process.env.REACT_APP_API_URL}/get-image/${image}`}
-          alt=""
+          alt={title}
           style={{ width: "100px" }}
         />
       );
@@ -25,7 +25,7 @@ function LatestPosts({ posts }) {
       {posts.map((post, index) => (
         <div className="media border-bottom py-3" key={index}>
           <Link to={`/blog-single/${post.slug}`} href="#">
-            {handleImage(post.image)}
+            {handleImage(post.image, post.title)}
           </Link>
           <div className="media-body">
             <h6 className="my-2">
