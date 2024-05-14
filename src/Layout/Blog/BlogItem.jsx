@@ -5,6 +5,7 @@ import SliderBlog from "../../components/SliderBlog";
 import SidebarBlog from "../../components/SidebarBlog";
 import BlogContent from "../../components/BlogContent";
 import BlogComment from "../../components/BlogComment";
+import Meta from "../../components/Head/Meta";
 
 function BlogItem() {
   const { slug } = useParams();
@@ -31,6 +32,7 @@ function BlogItem() {
 
   return (
     <>
+      <Meta title={postItem.title} description={postItem.summary} />
       <SliderBlog />
       <section className="section blog-wrap bg-gray">
         <div className="container">
