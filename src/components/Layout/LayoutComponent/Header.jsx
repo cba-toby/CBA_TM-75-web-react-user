@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
+
 function Header() {
+  const link_facebook = process.env.REACT_APP_LINK_FACEBOOK;
   return (
     <header className="navigation">
       <div className="header-top ">
@@ -6,15 +9,15 @@ function Header() {
           <div className="row justify-content-between align-items-center">
             <div className="col-lg-2 col-md-4">
               <div className="header-top-socials text-center text-lg-left text-md-left">
-                <a href="https://www.facebook.com/themefisher" target="_blank">
+                <Link to={link_facebook} target="_blank">
                   <i className="ti-facebook"></i>
-                </a>
-                <a href="https://twitter.com/themefisher" target="_blank">
+                </Link>
+                {/* <a href="https://twitter.com/themefisher" target="_blank">
                   <i className="ti-twitter"></i>
                 </a>
                 <a href="https://github.com/themefisher/" target="_blank">
                   <i className="ti-github"></i>
-                </a>
+                </a> */}
               </div>
             </div>
             <div className="col-lg-10 col-md-8 text-center text-lg-right text-md-right">
@@ -24,7 +27,7 @@ function Header() {
                 </a>
                 <a href="mailto:support@gmail.com">
                   <i className="fa fa-envelope mr-2"></i>
-                  <span>toby@cybridge.jp</span>
+                  <span>pttrungvt@gmail.com</span>
                 </a>
               </div>
             </div>
@@ -33,9 +36,9 @@ function Header() {
       </div>
       <nav className="navbar navbar-expand-lg  py-4" id="navbar">
         <div className="container">
-          <a className="navbar-brand" href="index.html">
+          <Link className="navbar-brand" to="/">
             Toby<span>Blog.</span>
-          </a>
+          </Link>
 
           <button
             className="navbar-toggler collapsed"
@@ -54,35 +57,15 @@ function Header() {
             id="navbarsExample09"
           >
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item dropdown show">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="dropdown05"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="true"
-                >
-                  Blog
-                </a>
-                <ul className="dropdown-menu show" aria-labelledby="dropdown05">
-                  <li>
-                    <a className="dropdown-item" href="blog-grid.html">
-                      Blog Grid
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="blog-sidebar.html">
-                      Blog with Sidebar
-                    </a>
-                  </li>
-
-                  <li>
-                    <a className="dropdown-item" href="blog-single.html">
-                      Blog Single
-                    </a>
-                  </li>
-                </ul>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/">
+                  Home <span className="sr-only">(current)</span>
+                </Link>
+              </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/blog">
+                  Blog <span className="sr-only">(current)</span>
+                </Link>
               </li>
             </ul>
 

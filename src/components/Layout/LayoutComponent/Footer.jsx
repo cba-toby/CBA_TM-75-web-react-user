@@ -1,4 +1,10 @@
+import { Link } from "react-router-dom";
+
 function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <footer className="footer section">
       <div className="container">
@@ -10,7 +16,14 @@ function Footer() {
 
               <ul className="list-unstyled footer-menu lh-35">
                 <li>
-                  <a href="#">About</a>
+                  <Link to="/" onClick={scrollToTop}>
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog" onClick={scrollToTop}>
+                    Blog
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -25,7 +38,7 @@ function Footer() {
                 </h3>
               </div>
               <h6>
-                <a href="tel:+23-345-67890">toby@cybridge.jp</a>
+                <a href="tel:+23-345-67890">pttrungvt@gmail.com</a>
               </h6>
               <a href="mailto:support@gmail.com">
                 <span className="text-color h4">+123-123-123</span>
@@ -57,19 +70,9 @@ function Footer() {
             <div className="col-lg-4 col-md-12 col-sm-12 text-left text-lg-left">
               <ul className="list-inline footer-socials">
                 <li className="list-inline-item">
-                  <a href="https://www.facebook.com/themefisher">
+                  <Link to={process.env.REACT_APP_LINK_FACEBOOK}>
                     <i className="ti-facebook mr-2"></i>Facebook
-                  </a>
-                </li>
-                <li className="list-inline-item">
-                  <a href="https://twitter.com/themefisher">
-                    <i className="ti-twitter mr-2"></i>Twitter
-                  </a>
-                </li>
-                <li className="list-inline-item">
-                  <a href="https://www.pinterest.com/themefisher/">
-                    <i className="ti-linkedin mr-2 "></i>Linkedin
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
