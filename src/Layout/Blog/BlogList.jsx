@@ -67,10 +67,7 @@ function BlogList() {
 
   return (
     <>
-      <Meta
-        title="Home"
-        description="Trang web chia sẽ kiến thức về lập trình web và công cụ tiện ích"
-      />
+      <Meta title="TobyBlog" />
       <SliderBlog />
       <section className="section blog-wrap bg-gray">
         <div className="container">
