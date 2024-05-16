@@ -3,6 +3,8 @@ import DefaultLayout from "./components/Layout/DefautLayout";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import BlogList from "./Layout/Blog/BlogList";
 import BlogItem from "./Layout/Blog/BlogItem";
+import Home from "./Layout/Home";
+import Page404 from "./Layout/Page404";
 
 const publicRoutes = createBrowserRouter([
   {
@@ -11,7 +13,7 @@ const publicRoutes = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Navigate to="blog" />,
+        element: <Home />,
       },
       {
         path: "blog",
@@ -20,6 +22,10 @@ const publicRoutes = createBrowserRouter([
       {
         path: "blog-single/:slug",
         element: <BlogItem />,
+      },
+      {
+        path: "*",
+        element: <Page404 />,
       },
     ],
   },
