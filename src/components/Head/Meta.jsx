@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { JsonLd } from "react-schemaorg";
 import { helmetJsonLdProp } from "react-schemaorg";
 
-function Meta({ title, description }) {
+function Meta({ title }) {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "BlogPosting", // Ví dụ loại từ Schema.org
@@ -29,7 +29,11 @@ function Meta({ title, description }) {
     <>
       <Helmet>
         <title>{title}</title>
-        {description && <meta name="description" content={description} />}
+        <meta
+          name="description"
+          content="Trang web chia sẽ kiến thức về lập trình web và công cụ tiện ích"
+        />
+        <meta name="keywords" content="develop, web, AWS" />
       </Helmet>
       <Helmet
         script={[
