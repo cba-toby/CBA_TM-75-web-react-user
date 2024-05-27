@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import NavItem from "../../Head/NavItem";
 
 function Header() {
   const link_facebook = process.env.REACT_APP_LINK_FACEBOOK;
+
   return (
     <header className="navigation">
       <div className="header-top ">
@@ -40,43 +42,15 @@ function Header() {
             Toby<span>Blog.</span>
           </Link>
 
-          <button
-            className="navbar-toggler collapsed"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarsExample09"
-            aria-controls="navbarsExample09"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="fa fa-bars"></span>
-          </button>
-
           <div
             className="collapse navbar-collapse text-center"
             id="navbarsExample09"
           >
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item active">
-                <Link className="nav-link" to="/">
-                  Home <span className="sr-only">(current)</span>
-                </Link>
-              </li>
-              <li className="nav-item active">
-                <Link className="nav-link" to="/blog">
-                  Blog <span className="sr-only">(current)</span>
-                </Link>
-              </li>
+              <NavItem to="/">Home</NavItem>
+              <NavItem to="/blog">Blog</NavItem>
+              <NavItem to="/contract">Contract</NavItem>
             </ul>
-
-            <form className="form-lg-inline my-2 my-md-0 ml-lg-4 text-center">
-              <a
-                href="contact.html"
-                className="btn btn-solid-border btn-round-full"
-              >
-                Get a Quote
-              </a>
-            </form>
           </div>
         </div>
       </nav>

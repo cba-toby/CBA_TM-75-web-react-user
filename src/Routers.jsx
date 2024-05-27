@@ -5,6 +5,7 @@ import BlogList from "./Layout/Blog/BlogList";
 import BlogItem from "./Layout/Blog/BlogItem";
 import Home from "./Layout/Home";
 import Page404 from "./Layout/Page404";
+import Contract from "./Layout/Contract";
 
 const publicRoutes = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const publicRoutes = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "contract",
+        element: <Contract />,
       },
       {
         path: "blog",
