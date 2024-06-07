@@ -1,74 +1,65 @@
-function BlogComment() {
+import CommentContent from "./Commet/CommentContent";
+import axiosClient from "../axios-client";
+import { useState } from "react";
+
+function BlogComment({data, newComments, slugPost}) {
+  const [errors, setErrors] = useState({});
+  const comments = data;
+  const [dataComment, setDataComment] = useState({
+    name: '',
+    email: '',
+    comment: '',
+    postSlug: ''
+  });
+
+  const submitComment = (e) => {
+    dataComment.postSlug = slugPost;
+    let url = '/user/comment';
+    e.preventDefault();
+
+    axiosClient.post(url, dataComment).then((res) => {
+      setErrors({});
+      setDataComment({
+        name: '',
+        email: '',
+        comment: '',
+        postSlug: ''
+      });
+    })
+    .catch((error) => {
+      if (error.response.status === 422) {
+        console.log(error.response.data.errors);
+        setErrors(error.response.data.errors);
+      }
+    });
+  };
+
   return (
     <>
       <div className="col-lg-12 mb-5">
         <div className="comment-area card border-0 p-5">
           <h4 className="mb-4">2 Comments</h4>
           <ul className="comment-tree list-unstyled">
-            <li className="mb-5">
-              <div className="comment-area-box">
-                <img
-                  alt=""
-                  src="images/blog/test1.jpg"
-                  className="img-fluid float-left mr-3 mt-2"
-                />
-
-                <h5 className="mb-1">Philip W</h5>
-                <span>United Kingdom</span>
-
-                <div className="comment-meta mt-4 mt-lg-0 mt-md-0 float-lg-right float-md-right">
-                  <a href="#">
-                    <i className="icofont-reply mr-2 text-muted"></i>
-                    Reply |
-                  </a>
-                  <span className="date-comm">Posted October 7, 2018 </span>
-                </div>
-
-                <div className="comment-content mt-3">
-                  <p>
-                    Some consultants are employed indirectly by the client via a
-                    consultancy staffing company, a company that provides
-                    consultants on an agency basis.{" "}
-                  </p>
-                </div>
-              </div>
-            </li>
-
-            <li>
-              <div className="comment-area-box">
-                <img
-                  alt=""
-                  src="images/blog/test2.jpg"
-                  className="mt-2 img-fluid float-left mr-3"
-                />
-
-                <h5 className="mb-1">Philip W</h5>
-                <span>United Kingdom</span>
-
-                <div className="comment-meta mt-4 mt-lg-0 mt-md-0 float-lg-right float-md-right">
-                  <a href="#">
-                    <i className="icofont-reply mr-2 text-muted"></i>
-                    Reply |
-                  </a>
-                  <span className="date-comm">Posted October 7, 2018</span>
-                </div>
-
-                <div className="comment-content mt-3">
-                  <p>
-                    Some consultants are employed indirectly by the client via a
-                    consultancy staffing company, a company that provides
-                    consultants on an agency basis.{" "}
-                  </p>
-                </div>
-              </div>
-            </li>
+            {comments.map((comment, index) => (
+                <CommentContent key={index} name={comment.name} comment={comment.comment} time={comment.created_at}/>
+            ))}
+            {newComments.map((comment, index) => (
+                <CommentContent key={index} name={comment.name} comment={comment.comment} time={comment.created_at}/>
+            ))}
           </ul>
         </div>
       </div>
 
       <div className="col-lg-12">
-        <form className="contact-form bg-white rounded p-5" id="comment-form">
+        <form className="contact-form bg-white rounded p-5" onSubmit={submitComment} id="comment-form">
           <h4 className="mb-4">Write a comment</h4>
+          {errors && (
+              <div style={{ color: "red" }}>
+                {Object.keys(errors).map((key) => (
+                  <p key={key}>{errors[key][0]}</p>
+                ))}
+              </div>
+            )}
           <div className="row">
             <div className="col-md-6">
               <div className="form-group">
@@ -76,6 +67,8 @@ function BlogComment() {
                   className="form-control"
                   type="text"
                   name="name"
+                  value={dataComment.name}
+                  onChange={(e) => setDataComment({...dataComment, name: e.target.value})}
                   id="name"
                   placeholder="Name:"
                 />
@@ -87,6 +80,8 @@ function BlogComment() {
                   className="form-control"
                   type="text"
                   name="mail"
+                  value={dataComment.email}
+                  onChange={(e) => setDataComment({...dataComment, email: e.target.value})}
                   id="mail"
                   placeholder="Email:"
                 />
@@ -98,6 +93,8 @@ function BlogComment() {
             className="form-control mb-3"
             name="comment"
             id="comment"
+            value={dataComment.comment}
+            onChange={(e) => setDataComment({...dataComment, comment: e.target.value})}
             cols="30"
             rows="5"
             placeholder="Comment"

@@ -6,14 +6,28 @@ import SidebarBlog from "../../components/SidebarBlog";
 import BlogContent from "../../components/BlogContent";
 import BlogComment from "../../components/BlogComment";
 import Meta from "../../components/Head/Meta";
+import io from 'socket.io-client';
 
 function BlogItem() {
   const { slug } = useParams();
   const [postItem, setPostItem] = useState({});
   const [author, setAuthor] = useState({});
+  const [newComments, setNewComments] = useState([]);
+  const [comment, setComment] = useState([]);
+  const [views, setViews] = useState(0);
 
   useEffect(() => {
     getItems(slug);
+    console.log(slug);
+    const socket = io('http://localhost:5000'); // Connect server Node.js
+
+    socket.on(`newMessage.${slug}`, (message) => {
+      setNewComments((prevNewComments) => [...prevNewComments, message]);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const getItems = (slug) => {
@@ -24,6 +38,8 @@ function BlogItem() {
       .then((res) => {
         setPostItem(res.data.post);
         setAuthor(res.data.author);
+        setComment(res.data.comments);
+        setViews(res.data.views);
       })
       .catch((err) => {
         console.log(err);
@@ -39,8 +55,8 @@ function BlogItem() {
           <div className="row">
             <div className="col-lg-8">
               <div className="row">
-                <BlogContent data={postItem} />
-                <BlogComment />
+                <BlogContent data={postItem} totalComments={comment.length} totalViews={views}/>
+                <BlogComment data={comment} newComments={newComments} slugPost={slug}/>
               </div>
             </div>
             <SidebarBlog author={author} />
