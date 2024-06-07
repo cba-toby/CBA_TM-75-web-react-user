@@ -1,8 +1,8 @@
 import "../css/blog-content.css";
 import { formatDate } from "../utils/dateUtils";
 
-function BlogContent(data) {
-  const { title, content, updated_at, category, tags, image } = data.data;
+function BlogContent({data, totalComments, totalViews}) {
+  const { title, content, updated_at, category, tags, image } = data;
   const handleImage = (image, title) => {
     return (
       <div className="text-center">
@@ -23,10 +23,10 @@ function BlogContent(data) {
           <div className="blog-item-content bg-white p-5">
             <div className="blog-item-meta bg-gray py-1 px-2">
               <span className="text-muted text-capitalize mr-3">
-                <i className="ti-pencil-alt mr-2"></i>Creativity
+                <i className="ti-comment mr-2"></i>{totalComments} Comments
               </span>
               <span className="text-muted text-capitalize mr-3">
-                <i className="ti-comment mr-2"></i>5 Comments
+                <i className="ti-eye mr-2"></i>{totalViews} Views
               </span>
               <span className="text-black text-capitalize mr-3">
                 <i className="ti-time mr-1"></i> {formatDate(updated_at)}
