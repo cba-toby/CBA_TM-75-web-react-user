@@ -13,7 +13,7 @@ function Home() {
                 </span>
                 <h1 className="animated fadeInUp mb-5">
                   Mong muốn của tôi <br />
-                  là chia sẽ các iến thức <br />
+                  là chia sẽ kiến thức <br />
                   và trải nghiệm cho mọi người
                 </h1>
                 <Link

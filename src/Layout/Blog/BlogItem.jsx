@@ -19,7 +19,7 @@ function BlogItem() {
   useEffect(() => {
     getItems(slug);
     console.log(slug);
-    const socket = io('http://localhost:5000'); // Connect server Node.js
+    const socket = io('http://10.11.15.10:5000'); // Connect server Node.js
 
     socket.on(`newMessage.${slug}`, (message) => {
       setNewComments((prevNewComments) => [...prevNewComments, message]);

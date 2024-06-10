@@ -9,8 +9,16 @@ function Contract() {
     content: "",
   });
 
-  const sendContact = (
-  ) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setContact({
+      ...contact,
+      [name]: value,
+    });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
     const url = `/user/contact`;
     axiosClient.post(url, contact).then((res) => {
       if(res.status === 200){
@@ -22,20 +30,12 @@ function Contract() {
           content: "",
         });
       }
-    });
-  };
-  
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setContact({
-      ...contact,
-      [name]: value,
-    });
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    sendContact();
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("Send contact fail");
+    })
+    ;
   }
   return (
     <>

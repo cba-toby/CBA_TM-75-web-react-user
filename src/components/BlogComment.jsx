@@ -28,7 +28,6 @@ function BlogComment({data, newComments, slugPost}) {
     })
     .catch((error) => {
       if (error.response.status === 422) {
-        console.log(error.response.data.errors);
         setErrors(error.response.data.errors);
       }
     });
@@ -38,7 +37,7 @@ function BlogComment({data, newComments, slugPost}) {
     <>
       <div className="col-lg-12 mb-5">
         <div className="comment-area card border-0 p-5">
-          <h4 className="mb-4">2 Comments</h4>
+          <h4 className="mb-4">Comments Here</h4>
           <ul className="comment-tree list-unstyled">
             {comments.map((comment, index) => (
                 <CommentContent key={index} name={comment.name} comment={comment.comment} time={comment.created_at}/>
